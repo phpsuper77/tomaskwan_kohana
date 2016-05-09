@@ -1,0 +1,1 @@
+Message from GYMHIT - <?=$user;?> has commented on your post

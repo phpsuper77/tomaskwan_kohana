@@ -1,0 +1,180 @@
+/* calendar */
+#calendar-session
+{
+/*
+    width:50%;  
+    margin-left: auto ;
+    margin-right: auto ;
+*/
+}
+
+.page-breadcrumb {
+    font-size: 16px;
+}
+
+.container-schedule { 
+    width: 1300px !important;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+/* center */
+.gh-error
+{
+    width:50%;  
+    margin-left: auto ;
+    margin-right: auto ;
+    text-align: center;
+    font-size: 32px;
+    padding: 30px;
+    color: #697882;
+    font-weight: 700;
+}
+
+/* class info */
+.gh-title 
+{
+    clear: both;
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.gh-value 
+{
+    text-transform: uppercase;
+    color: #989ea9;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+}
+
+/* caption */
+.gh-caption
+{
+    color: #697882;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* button override */
+.gh-btn-default
+{
+    color: #ffffff;
+    background-color: #f29637;
+    font-weight: 700;
+}
+
+/* fixed issue #136 */
+.ui-autocomplete { position: absolute; cursor: default;z-index:1000 !important;}  
+
+.user-page-header
+{
+    text-align: center;
+/*
+    width: 50%;  
+    margin-left: auto;
+    margin-right: auto;
+*/
+}
+
+.user-page-avatar img
+{
+    width: 104px;
+    height: 104px;
+    border: 3px solid #ced2da;
+}
+
+.user-page-avatar
+{
+    padding: 5px;
+/*
+    position: relative;
+    top: 10px;
+    left: -84px;
+    padding: 2px;
+*/
+}
+
+.user-page-name
+{
+    text-align:center;
+    padding: 0px;
+    margin: 0px;
+    white-space: nowrap;
+/*
+    position: relative;
+    top: -80px;
+    left: 80px;
+*/
+}
+
+.user-page-superior
+{
+white-space: nowrap;
+/*
+    position: relative;
+    top: -80px;
+    left: 80px;
+*/
+}
+
+.credentials img
+{
+    width: 15%;
+}
+
+#staffof-legend
+{
+}
+
+.staffof-name
+{
+}
+
+.staffof-value
+{
+}
+
+.staffof-color
+{
+    width: 20px;
+    height: 20px;
+    position:relative;
+    left:80px;
+}
+
+/**
+ * badget-user-small
+ */
+.user-badge-small
+{
+    position: relative;
+    top: 5px;
+}
+.user-badge-small .name
+{
+    position: relative;
+    top: -28px;
+    right: -45px;
+}
+
+  #map {
+    width: 500px;
+    height: 400px;
+    background-color: #CCC;
+  }
+
+ul.ui-autocomplete {
+    background:#272a34;
+    color: #fff;
+    font-size: 14px;
+    border: 0px;
+}
+
+ul.ui-autocomplete > li {
+    height: 32px;
+    padding-top: 4px;
+}

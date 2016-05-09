@@ -1,0 +1,1 @@
+Thank you for signing up for GymHit!  We are excited to better connect you with health and wellness professionals as well as other users in your area and around the world. Please check your user email address for additional info on how to take fully take advantage of the GymHit platform.

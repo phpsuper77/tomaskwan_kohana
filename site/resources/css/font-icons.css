@@ -1,0 +1,244 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?a6nk2o');
+	src:url('../fonts/icomoon.eot?#iefixa6nk2o') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?a6nk2o') format('woff'),
+		url('../fonts/icomoon.ttf?a6nk2o') format('truetype'),
+		url('../fonts/icomoon.svg?a6nk2o#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	font-family: 'icomoon','Simple-Line-Icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.main-select [class^="icon-"],.main-select [class*=" icon-"] {
+	font-size:24px;
+}
+
+.icon-mail2:before {
+	content: "\e646";
+}
+
+.icon-arrow_down:before {
+	content: "\e600";
+}
+.icon-arrow_left:before {
+	content: "\e601";
+}
+.icon-arrow_right:before {
+	content: "\e602";
+}
+.icon-arrow_up:before {
+	content: "\e603";
+}
+.icon-basketball:before {
+	content: "\e604";
+}
+.icon-boot_camps:before {
+	content: "\e605";
+}
+.icon-calendar:before {
+	content: "\e606";
+}
+.icon-cardio:before {
+	content: "\e607";
+}
+.icon-child_care:before {
+	content: "\e608";
+}
+.icon-chiropraktor:before {
+	content: "\e609";
+}
+.icon-close:before {
+	content: "\e60a";
+}
+.icon-comments:before {
+	content: "\e60b";
+}
+.icon-conversation2:before {
+	content: "\e60c";
+}
+.icon-cross_fit:before {
+	content: "\e60d";
+}
+.icon-cycling:before {
+	content: "\e60e";
+}
+.icon-dance:before {
+	content: "\e60f";
+}
+.icon-dots_slider:before {
+	content: "\e610";
+}
+.icon-facebook:before {
+	content: "\e611";
+}
+.icon-golf:before {
+	content: "\e612";
+}
+.icon-googleplus:before {
+	content: "\e613";
+}
+.icon-group_excercise_classes:before {
+	content: "\e614";
+}
+.icon-group_fitness:before {
+	content: "\e615";
+}
+.icon-health_club_spinning:before {
+	content: "\e616";
+}
+.icon-iam_looking_for:before {
+	content: "\e617";
+}
+.icon-in-home_training:before {
+	content: "\e618";
+}
+.icon-like:before {
+	content: "\e619";
+}
+.icon-linkedin:before {
+	content: "\e61a";
+}
+.icon-locker_rooms:before {
+	content: "\e61b";
+}
+.icon-marathons:before {
+	content: "\e61c";
+}
+.icon-massage_bed:before {
+	content: "\e61d";
+}
+.icon-massage:before {
+	content: "\e61e";
+}
+.icon-mma:before {
+	content: "\e61f";
+}
+.icon-new_connections:before {
+	content: "\e620";
+}
+.icon-notification5:before {
+	content: "\e621";
+}
+.icon-nutricionist:before {
+	content: "\e622";
+}
+.icon-obstacle_courses:before {
+	content: "\e623";
+}
+.icon-olympic_lifting:before {
+	content: "\e624";
+}
+.icon-personal_trainer:before {
+	content: "\e625";
+}
+.icon-personal_training:before {
+	content: "\e626";
+}
+.icon-pintrest:before {
+	content: "\e627";
+}
+.icon-pool:before {
+	content: "\e628";
+}
+.icon-position3:before {
+	content: "\e629";
+	font-weight:700;
+}
+.icon-post_time:before {
+	content: "\e62a";
+}
+.icon-prenatal_training:before {
+	content: "\e62b";
+}
+.icon-protein1:before {
+	content: "\e62c";
+}
+.icon-remove:before {
+	content: "\e62d";
+}
+.icon-running:before {
+	content: "\e62e";
+}
+.icon-sauna:before {
+	content: "\e62f";
+}
+.icon-send4:before {
+	content: "\e630";
+}
+.icon-share_post:before {
+	content: "\e631";
+}
+.icon-shower:before {
+	content: "\e632";
+}
+.icon-smoothie:before {
+	content: "\e633";
+}
+.icon-softball:before {
+	content: "\e634";
+}
+.icon-spa:before {
+	content: "\e635";
+}
+.icon-sport_conditioning:before {
+	content: "\e636";
+}
+.icon-sport_lesson:before {
+	content: "\e637";
+}
+.icon-sport_lessons:before {
+	content: "\e638";
+}
+.icon-star_rating:before {
+	content: "\e639";
+}
+.icon-steam_room:before {
+	content: "\e63a";
+}
+.icon-swimming:before {
+	content: "\e63b";
+}
+.icon-tanning:before {
+	content: "\e63c";
+}
+.icon-towel:before {
+	content: "\e63d";
+}
+.icon-twitter:before {
+	content: "\e63e";
+}
+.icon-water_sports:before {
+	content: "\e63f";
+}
+.icon-weight_training:before {
+	content: "\e640";
+}
+.icon-weights:before {
+	content: "\e641";
+}
+.icon-welness_plans:before {
+	content: "\e642";
+}
+.icon-winter_sport:before {
+	content: "\e643";
+}
+.icon-yoga:before {
+	content: "\e644";
+}
+.icon-zumba:before {
+	content: "\e645";
+}

@@ -1,0 +1,184 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+class Controller_Site_Session extends Controller_Site_Public
+{
+    public $template = 'site/index';	
+
+    public function before()
+    {
+        parent::before();
+
+        $this->route = sanitizeValue($this->request->param('route'));
+
+        //model
+        $this->modelStatus = new Model_Status();	
+        $this->modelClass = new Model_Class();
+        $this->modelSpecoffer = new Model_Specoffer();
+        $this->modelFreePass = new Model_Freepass();
+
+    }
+
+    public function action_calendar_json()
+    {
+        $pageObj = Model_Page::getPageObjByRoute($this->route);
+        $userObj = $pageObj->getUserObj();
+        $settingObj = $userObj->getSettingObj();
+        $data = Arr::map('sanitizeHTMLValue', $this->request->query());
+
+        // existing events
+        $eventObjs = $this->loginUserObj->getEventObjs($filter, 0, 10000);
+        $datehash = array();
+        foreach ($eventObjs as $eventObj) {
+            $d = date('Y-m-d', $eventObj->getTimeFromInSecs());
+            if (!isset($datehash[$d])) {
+                $datehash[$d] = array();
+            }
+            $datehash[$d][] = $eventObj;
+        }
+
+        // fullCalendar sent in GMT
+        $start_day = $data['start']; // sunday
+        $end_day = $data['end']; // sat
+
+        $timeSettingObjs = $userObj->getTimeSettingObjs();
+
+        $events = array();
+        $incr = $settingObj->getSession();
+        $locationObj = $settingObj->getLocationObj();
+        foreach ($timeSettingObjs as $timeSettingObj) {
+            $d = date('Y-m-d', strtotime($data['start']) + ($timeSettingObj->getDay() * 60 * 60 * 24));
+            if (strlen($timeSettingObj->getTimeCustom())>0) {
+                // custom time ranges
+                $ranges = explode(",", trim($timeSettingObj->getTimeCustom())); 
+                foreach ($ranges as $range) {
+                    $time = explode("-", trim($range));
+                    if (count($time) > 1) {
+                        $timeFromStr = $d . ' ' . trim($time[0]).':00:00';
+                        $timeToStr = $d . ' ' . trim($time[1]).':00:00';
+                        $timeFrom = strtotime($timeFromStr);
+                        $timeTo = strtotime($timeToStr);
+                    } else {
+                        $timeFromStr = $d . ' ' . trim($time[0]).':00:00';
+                        $timeToStr = $d . ' ' . trim($time[0] + 1).':00:00';
+                        $timeFrom = strtotime($timeFromStr);
+                        $timeTo = strtotime($timeToStr);
+                    }
+                    for ($i = $timeFrom; $i < $timeTo; $i = $i + $incr) {
+                        $dt = date('Y-m-d', $i);
+                        if ($i <= time()) {
+                            continue;
+                        }
+                        $event = array();
+                        $event['allDay'] = false;
+                        $event['start'] = date('Y-m-d H:i:s', $i);
+                        $event['end'] = date('Y-m-d H:i:s', ($i + $incr));
+                        $event['start_time'] = $i;
+                        $event['end_time'] = $i + $incr;
+                        $event['title'] = "Available";
+                        $event['type'] = "available";
+                        $event['price'] = $settingObj->getPrice();
+                        $event['location'] = $locationObj->getFullName();
+                        $event['location_id'] = $locationObj->getId();
+                        $event['id']= md5(microtime());
+
+                        // check to see if we need to exlucde this available event
+                        $skip = false;
+                        if (isset($datehash[$dt])) {
+                            $eventObjs = $datehash[$dt];
+                            foreach ($eventObjs as $eventObj) {
+                                $startInSecs = $eventObj->getTimeFromInSecs();
+                                $endInSecs = $eventObj->getTimeToInSecs();
+                                if (!(($i + $incr) < $startInSecs || $i > $endInSecs)) {
+                                    // event overlap, skip this
+                                    $skip = true;
+                                    break;
+                                } 
+                            }
+                        }
+
+                        if (!$skip) {
+                            $events[] = $event;
+                        }
+                    }
+                }
+            } else {
+                $timeFrom = strtotime($d . ' ' .$timeSettingObj->getTimeFrom());
+                $timeTo = strtotime($d . ' ' . $timeSettingObj->getTimeTo());
+                for ($i = $timeFrom; $i < $timeTo; $i = $i + $incr) {
+                    $dt = date('Y-m-d', $i);
+                    if ($i <= time()) {
+                        continue;
+                    }
+                    $event = array();
+                    $event['allDay'] = false;
+                    $event['start'] = date('Y-m-d H:i:s', $i);
+                    $event['end'] = date('Y-m-d H:i:s', ($i + $incr));
+                    $event['start_time'] = $i;
+                    $event['end_time'] = $i + $incr;
+                    $event['title'] = "Available";
+                    $event['type'] = "available";
+                    $event['price'] = $settingObj->getPrice();
+                    $event['location'] = $locationObj->getFullName();
+                    $event['location_id'] = $locationObj->getId();
+                    $event['id']= md5(microtime());
+
+                    // check to see if we need to exlucde this available event
+                    $skip = false;
+                    if (isset($datehash[$dt])) {
+                        $eventObjs = $datehash[$dt];
+                        foreach ($eventObjs as $eventObj) {
+                            $startInSecs = $eventObj->getTimeFromInSecs();
+                            $endInSecs = $eventObj->getTimeToInSecs();
+                            if (!(($i + $incr) <= $startInSecs || $i >= $endInSecs)) {
+                                // event overlap, skip this
+                                $skip = true;
+                                break;
+                            } 
+                        }
+                    }
+                    if (!$skip) {
+                        $events[] = $event;
+                    }
+                }
+            }
+        }
+
+        // return json
+        $this->auto_render = false;
+        $this->is_ajax = TRUE;
+        header('content-type: application/json');
+        echo json_encode($events);
+        exit;
+    }
+
+    public function action_schedule()
+    {
+        $pageObj = Model_Page::getPageObjByRoute($this->route);
+        $userObj = $pageObj->getUserObj();
+        $superiorObj = $userObj->getSuperiorObj();
+        $settingObj = $userObj->getSettingObj();
+        
+        /*
+        $filter['owner_id'] = $userObj->getId();
+        $bookingObjs = $userObj->getBookingObjs($filter);
+         */
+
+        $this->template->content = View::factory('site/templates/session/schedule');
+        $this->template->content->route = $this->route;
+        $this->template->content->scheduleObjs = $scheduleObjs;
+        //$this->template->content->owner = $pageObj->getUserId();
+        $this->template->content->pageObj = $pageObj;
+        $this->template->content->userObj = $userObj;
+        $this->template->content->friendObjs = $userObj->getFriendObjs(array(), 0, 9);
+        $this->template->content->superiorObj = $superiorObj;
+    //    $this->template->content->bookingObjs = $bookingObjs;
+        $this->template->content->settingObj = $settingObj;
+        $this->template->content->modelOrder = new Model_Order();
+
+        $this->template->content->addBookingModal = View::factory('site/templates/session/modal_add');
+        $this->template->content->addBookingModal->pageObj = $pageObj;
+        $this->template->content->addBookingModal->userObj = $userObj;
+        $this->template->content->addBookingModal->settingObj = $settingObj;
+    }
+
+}

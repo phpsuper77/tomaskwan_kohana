@@ -1,0 +1,7 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+ 
+return array(
+    's3.bucket' => 'etechfocus',
+    's3.path' => '/gymhit',
+    's3.url' => 'https://s3-us-west-1.amazonaws.com/etechfocus/gymhit',
+);
